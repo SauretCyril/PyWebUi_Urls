@@ -8,14 +8,13 @@ function addURL() {
     const email = document.getElementById('email').value;
     const category = document.getElementById('category').value;
     
+   
     if (title && url) {
         if (isValidURL(url) && (email === '' || isValidEmail(email))) {
             urls.push({ title, url, email, category });
-            eel.save_urls(urls => { 
-                filterURLs(currentCategory);
-                clearForm();
-        });
-            
+            filterURLs(currentCategory);
+            clearForm();
+            //eel.save_urls(urls)
         } else {
             alert("Veuillez entrer une URL valide et un email valide (si fourni)!");
         }
@@ -168,6 +167,3 @@ window.addEventListener('load', function() {
     }) // Appel de la fonction Python pour charger les URLs après le chargement du DOM
     
 });
-
-
-

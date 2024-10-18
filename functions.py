@@ -2,7 +2,9 @@ import eel
 import json
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
+
 @eel.expose
 def save_urls(urls):
     # Ouvrir une fenêtre de dialogue pour choisir le répertoire
@@ -23,19 +25,29 @@ def save_urls(urls):
     else:
         print("Sauvegarde annulée.")
 
-import json
 @eel.expose
 def load_urls():
+    urls = []
     try:
         default_directory = os.path.join(os.getcwd(), os.getenv("SAVES_PATH"))
         file_path = os.path.join(default_directory, os.getenv("URLS_FILES"))
+        
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Le fichier {file_path} n'existe pas.")
+        
         with open(file_path, 'r', encoding='utf-8') as f:
             urls = json.load(f)  # Charger le contenu du fichier JSON
-            #filter_urls(current_category)  # Appeler la fonction pour filtrer les URLs
+            # filter_urls(current_category)  # Appeler la fonction pour filtrer les URLs
             print('URLs chargées avec succès!')
+    except FileNotFoundError as fnf_error:
+        print(f'Erreur: {fnf_error}')
+    except json.JSONDecodeError as json_error:
+        print(f'Erreur lors du décodage du fichier JSON: {json_error}')
     except Exception as error:
-        print('Erreur lors du chargement du fichier JSON:', error)
+        print(f'Erreur lors du chargement du fichier JSON: {error}')
+    
     return urls
+
 # Exemple d'utilisation
 
 
