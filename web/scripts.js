@@ -1,4 +1,4 @@
-let urls = [];
+window.urls = [];
 let currentCategory = 'Tous';
 const categories = ['Blog', 'Actualités', 'Technologie', 'Éducation', 'Autre'];
 
@@ -8,10 +8,10 @@ function addURL() {
     const email = document.getElementById('email').value;
     const category = document.getElementById('category').value;
     
-   
-    if (title && url) {
+    // Vérification des valeurs pour éviter les valeurs nulles
+    if (title && url && category) {
         if (isValidURL(url) && (email === '' || isValidEmail(email))) {
-            urls.push({ title, url, email, category });
+            window.urls.push({ title, url, email, category });
             filterURLs(currentCategory);
             clearForm();
             //eel.save_urls(urls)
@@ -19,7 +19,7 @@ function addURL() {
             alert("Veuillez entrer une URL valide et un email valide (si fourni)!");
         }
     } else {
-        alert("Veuillez remplir au moins le titre et l'URL!");
+        alert("Veuillez remplir au moins le titre, l'URL et la catégorie!");
     }
 }
 
@@ -48,7 +48,7 @@ function filterURLs(category) {
     currentCategory = category;
     const filteredURLs = category === 'Tous' 
         ? urls 
-        : urls.filter(item => item.category === category);
+        : window.urls.filter(item => item.category === category);
     
     updateURLList(filteredURLs);
     updateTabs(category);
@@ -63,7 +63,7 @@ function updateURLList(urlsToShow) {
         urlItem.className = 'url-item';
         urlItem.innerHTML = `
             <h3>${item.title}</h3>
-            <p class="url-link"><a href="${item.url}" target="_blank">${truncateURL(item.url, 20)}</a></p>
+            <p class="url-link"><a href="#" onclick="openUrl(${index}); return false;">${truncateURL(item.url, 20)}</a></p>
             <p>${truncateEmail(item.email, 15)}</p>
             <p>${item.category}</p>
             <select class="category-select" onchange="editCategory(${index}, this.value)">
@@ -74,6 +74,9 @@ function updateURLList(urlsToShow) {
         urlList.appendChild(urlItem);
         
     });
+}
+function openUrl(index){
+    eel.openUrl(window.urls[index].url);
 }
 
 function truncateURL(url, maxLength) {
@@ -102,12 +105,12 @@ function updateTabs(activeCategory) {
 
 function sortURLs() {
     const sortBy = document.getElementById('sortBy').value;
-    urls.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
+    window.urls.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
     filterURLs(currentCategory);
 }
 
 function editCategory(index, newCategory) {
-    urls[index].category = newCategory;
+    window.urls[index].category = newCategory;
 }
 
 function updateCategory(index) {
@@ -115,9 +118,9 @@ function updateCategory(index) {
 }
 
 
-/* 
+
 function loadURLs() {
-    const input = document.createElement('input');
+    /* const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'application/json';
     input.onchange = function(event) {
@@ -134,9 +137,9 @@ function loadURLs() {
         };
         reader.readAsText(file);
     };
-    input.click();
+    input.click(); */
 }
- */
+
 function toggleCreationSection() {
     const creationSection = document.querySelector('.creation-section');
     const displaySection = document.querySelector('.display-section');
@@ -155,11 +158,11 @@ window.addEventListener('load', function() {
         displaySection.classList.add('full-width');
     }
     
-    // Convertir le JSON en tableau
+    //Convertir le JSON en tableau
     
     eel.load_urls()(jurls => { 
         try {
-            urls = JSON.parse(jurls);
+            urls = jurls //JSON.parse(jurls);
             filterURLs('Tous');
         } catch (error) {
             alert('Erreur lors du chargement des URLs : ' + error.message);
@@ -167,3 +170,6 @@ window.addEventListener('load', function() {
     }) // Appel de la fonction Python pour charger les URLs après le chargement du DOM
     
 });
+function saveURLs() {
+eel.save_urls(window.urls);
+}
