@@ -1,0 +1,80 @@
+<html>
+    <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bibliothèque d'URLs</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <button onclick="toggleCreationSection()" id="toggleButton">
+            <svg class="toggle-icon" viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </button>
+        <h1>Bibliothèque d'URLs</h1>
+        <div class="header-buttons">
+            <button onclick="saveURLs()">Sauvegarder</button>
+            <button onclick="loadURLs()">Charger</button>
+        </div>
+    </header>
+    <div class="main-container">
+        <div class="creation-section">
+            <h1>Bibliothèque d'URLs</h1>
+            
+            <div class="form-group">
+                <label for="title">Titre:</label>
+                <input type="text" id="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Catégorie:</label>
+                <select id="category">
+                    <option value="Blog">Blog</option>
+                    <option value="Actualités">Actualités</option>
+                    <option value="Technologie">Technologie</option>
+                    <option value="Éducation">Éducation</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+            
+            <button onclick="addURL()">Ajouter une URL</button>
+        </div>
+        
+        <div class="display-section">
+            <div class="tabs" id="categoryTabs">
+                <button class="tab active" onclick="filterURLs('Tous')">Tous</button>
+                <button class="tab" onclick="filterURLs('Blog')">Blog</button>
+                <button class="tab" onclick="filterURLs('Actualités')">Actualités</button>
+                <button class="tab" onclick="filterURLs('Technologie')">Technologie</button>
+                <button class="tab" onclick="filterURLs('Éducation')">Éducation</button>
+                <button class="tab" onclick="filterURLs('Autre')">Autre</button>
+            </div>
+            
+            <div class="sort-container">
+                <select id="sortBy" onchange="sortURLs()">
+                    <option value="title">Trier par titre</option>
+                    <option value="url">Trier par URL</option>
+                    <option value="email">Trier par email</option>
+                    <option value="category">Trier par catégorie</option>
+                </select>
+            </div>
+            
+            <div id="urlList"></div>
+        </div>
+    </div>
+
+    <script src="eel.js"></script> 
+    <script src="./scripts.js"></script> 
+    <script>
+  
+    </script>
+</body></html>
