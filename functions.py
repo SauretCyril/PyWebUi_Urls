@@ -25,7 +25,10 @@ def save_urls(urls):
     # Cacher la fenêtre principale
 
     # Validation des URLs
-    invalid_urls = [url for url in urls if not is_valid_url(url)]
+    # Filtrer pour ne garder que les chaînes
+    valid_urls = [url for url in urls if isinstance(url, str)]
+    invalid_urls = [url for url in valid_urls if not is_valid_url(url)]
+    
     if invalid_urls:
         print(f"Erreur: Les URLs suivantes ne sont pas valides: {invalid_urls}")
         return  # Ne pas sauvegarder si des URLs sont invalides

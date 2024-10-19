@@ -1,12 +1,17 @@
 window.urls = [];
 let currentCategory = 'Tous';
-const categories = ['Blog', 'Actualités', 'Technologie', 'Éducation', 'Autre'];
+const categories = ['Portail', 'Tables', 'Outils', 'Profiles', 'Autre'];
 
 function addURL() {
     const title = document.getElementById('title').value;
     const url = document.getElementById('url').value;
     const email = document.getElementById('email').value;
     const category = document.getElementById('category').value;
+
+    // Initialisation de window.urls si ce n'est pas déjà fait
+    if (!window.urls) {
+        window.urls = [];  // Initialisation de l'array
+    }
     
     // Vérification des valeurs pour éviter les valeurs nulles
     if (title && url && category) {
@@ -14,7 +19,7 @@ function addURL() {
             window.urls.push({ title, url, email, category });
             filterURLs(currentCategory);
             clearForm();
-            //eel.save_urls(urls)
+            saveURLs();
         } else {
             alert("Veuillez entrer une URL valide et un email valide (si fourni)!");
         }
@@ -72,7 +77,7 @@ function updateURLList(urlsToShow) {
             <button class="edit-category" onclick="updateCategory(${index})">Modifier</button>
         `;
         urlList.appendChild(urlItem);
-        
+       
     });
 }
 function openUrl(index){
@@ -111,6 +116,7 @@ function sortURLs() {
 
 function editCategory(index, newCategory) {
     window.urls[index].category = newCategory;
+    saveURLs();
 }
 
 function updateCategory(index) {
@@ -119,26 +125,6 @@ function updateCategory(index) {
 
 
 
-function loadURLs() {
-    /* const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'application/json';
-    input.onchange = function(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                urls = JSON.parse(e.target.result);
-                filterURLs(currentCategory);
-                alert('URLs chargées avec succès!');
-            } catch (error) {
-                alert('Erreur lors du chargement du fichier JSON.');
-            }
-        };
-        reader.readAsText(file);
-    };
-    input.click(); */
-}
 
 function toggleCreationSection() {
     const creationSection = document.querySelector('.creation-section');
@@ -165,7 +151,7 @@ window.addEventListener('load', function() {
             urls = jurls //JSON.parse(jurls);
             filterURLs('Tous');
         } catch (error) {
-            alert('Erreur lors du chargement des URLs : ' + error.message);
+            console.log('Erreur lors du chargement des URLs : ' + error.message);
         }
     }) // Appel de la fonction Python pour charger les URLs après le chargement du DOM
     

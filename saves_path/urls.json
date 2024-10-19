@@ -1,1 +1,128 @@
-null
+[
+    {
+        "title": "Linkedin Dev",
+        "url": "https://developer.linkedin.com/",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "linledin",
+        "url": "https://www.linkedin.com/in/cyril-sauret-00586295/",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Jira",
+        "url": "https://sauretcyril-1721475150681.atlassian.net/jira/software/projects/GOT3/boards/2/backlog?epics=visible",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Contact",
+        "url": "https://www.notion.so/6a07b7a450b3426c9a797714016c315c?v=6bb1303680c34d83b7aa12e939a4da6d",
+        "email": "",
+        "category": "Notion"
+    },
+    {
+        "title": "Motivations",
+        "url": "https://www.notion.so/ToSend-1a4d2d55a408485b9f1200fe5ff9f37e",
+        "email": "",
+        "category": "Notion"
+    },
+    {
+        "title": "Free-Works ",
+        "url": "https://www.free-work.com/fr/tech-it",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "indeed",
+        "url": "https://fr.indeed.com/?from=gnav-messaging--messaging-webapp",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "hellowork",
+        "url": "https://www.hellowork.com/fr-fr/",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Malt",
+        "url": "https://www.malt.fr/profile/cyrilsauret",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Ici3dn",
+        "url": "https://ici3dn.fr",
+        "email": "",
+        "category": "Autre"
+    },
+    {
+        "title": "Tietalent",
+        "url": "https://tietalent.com/en/signup/talent/resume",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Les jeudis",
+        "url": "https://lesjeudis.com/onboarding",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "APEC",
+        "url": "https://www.apec.fr/",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "France Travail ",
+        "url": "https://candidat.francetravail.fr/",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Face book",
+        "url": "https://www.facebook.com/",
+        "email": "",
+        "category": "Portail"
+    },
+    {
+        "title": "Canevas",
+        "url": "https://www.canva.com/",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "CvScan",
+        "url": "https://cvscan.uk/fr/scanner/index.php",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "OpenAI",
+        "url": "https://platform.openai.com/docs/api-reference/authentication",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "Azure",
+        "url": "https://portal.azure.com/#home",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "llama",
+        "url": "https://www.llama-api.com/",
+        "email": "",
+        "category": "Outils"
+    },
+    {
+        "title": "heroku",
+        "url": "https://dashboard.heroku.com/apps",
+        "email": "sauretcyril@gmail.com",
+        "category": "Portail"
+    }
+]
