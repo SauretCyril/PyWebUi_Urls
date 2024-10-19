@@ -6,12 +6,6 @@
         "category": "Outils"
     },
     {
-        "title": "linledin",
-        "url": "https://www.linkedin.com/in/cyril-sauret-00586295/",
-        "email": "",
-        "category": "Portail"
-    },
-    {
         "title": "Jira",
         "url": "https://sauretcyril-1721475150681.atlassian.net/jira/software/projects/GOT3/boards/2/backlog?epics=visible",
         "email": "",
@@ -123,6 +117,12 @@
         "title": "heroku",
         "url": "https://dashboard.heroku.com/apps",
         "email": "sauretcyril@gmail.com",
+        "category": "Portail"
+    },
+    {
+        "title": "Linkedin",
+        "url": "https://www.linkedin.com/in/cyril-sauret-00586295/",
+        "email": "",
         "category": "Portail"
     }
 ]

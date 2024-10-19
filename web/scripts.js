@@ -1,6 +1,6 @@
 window.urls = [];
 let currentCategory = 'Tous';
-const categories = ['Portail', 'Tables', 'Outils', 'Profiles', 'Autre'];
+const categories = ['Portail', 'Notion', 'Outils', 'Profiles', 'Autre'];
 
 function addURL() {
     const title = document.getElementById('title').value;
@@ -66,29 +66,78 @@ function updateURLList(urlsToShow) {
     urlsToShow.forEach((item, index) => {
         const urlItem = document.createElement('div');
         urlItem.className = 'url-item';
-        urlItem.innerHTML = `
-            <h3>${item.title}</h3>
+        // Définir la couleur de fond en fonction de la catégorie
+        switch (item.category) {
+            case 'Portail':
+                urlItem.style.backgroundColor = 'lightblue'; // Couleur pour Portail
+                break;
+            case 'Notion':
+                urlItem.style.backgroundColor = 'lightcoral'; // Couleur pour Tables
+                break;
+            case 'Outils':
+                urlItem.style.backgroundColor = 'lightyellow'; // Couleur pour Outils
+                break;
+            case 'Profiles':
+                urlItem.style.backgroundColor = 'lightgreen'; // Couleur pour Profiles
+                break;
+            case 'Autre':
+                urlItem.style.backgroundColor = 'lightgray'; // Couleur pour Autre
+                break;
+            default:
+                urlItem.style.backgroundColor = ''; // Couleur par défaut
+        }
+        urlItem.innerHTML = createUrlItem(item, index);
+        
+        // Add click event to fill the creation fields
+        urlItem.onclick = () => {
+            // Réinitialiser la couleur de fond de tous les éléments
+            const allUrlItems = document.querySelectorAll('.url-item');
+            allUrlItems.forEach(item => {
+                item.style.backgroundColor = ''; // Réinitialise la couleur de fond
+            });
+
+            // Mettre à jour les champs de saisie
+            document.getElementById('title').value = item.title;
+            document.getElementById('url').value = item.url;
+            document.getElementById('email').value = item.email;
+            document.getElementById('category').value = item.category;
+
+            // Changer la couleur de fond de l'élément cliqué
+            urlItem.style.backgroundColor = 'lightgreen'; // Ajout de la couleur de fond
+        };
+
+        urlList.appendChild(urlItem);
+    });
+}
+
+function createUrlItem(item, index) {
+    return `
+        <div style="position: relative;">
+            <button class="delete-url" onclick="deleteURL(${index})" style="position: absolute; top: -10; right: -10; background: none; border: none; color: red; font-size: 16px;">✖</button>
+            <input type="text" value="${item.title}" onchange="updateTitle(${index}, this.value)" />
             <p class="url-link"><a href="#" onclick="openUrl(${index}); return false;">${truncateURL(item.url, 20)}</a></p>
             <p>${truncateEmail(item.email, 15)}</p>
             <p>${item.category}</p>
             <select class="category-select" onchange="editCategory(${index}, this.value)">
                 ${categories.map(cat => `<option value="${cat}" ${cat === item.category ? 'selected' : ''}>${cat}</option>`).join('')}
             </select>
-            <button class="edit-category" onclick="updateCategory(${index})">Modifier</button>
-        `;
-        urlList.appendChild(urlItem);
-       
-    });
+            <img src="path/to/disk-icon.png" alt="Modifier" class="edit-category" onclick="updateCategory(${index})" style="cursor: pointer;" />
+        </div>
+    `;
 }
+
+// ouverture de du navigateur avec l'url
 function openUrl(index){
     eel.openUrl(window.urls[index].url);
 }
 
+//racourci de l'url
 function truncateURL(url, maxLength) {
     if (url.length <= maxLength) return url;
     return url.substr(0, maxLength - 3) + '...';
 }
 
+//raccourci de l'email
 function truncateEmail(email, maxLength) {
     if (!email) return 'Non fourni';
     if (email.length <= maxLength) return email;
@@ -123,19 +172,30 @@ function updateCategory(index) {
     filterURLs(currentCategory);
 }
 
-
-
-
-function toggleCreationSection() {
-    const creationSection = document.querySelector('.creation-section');
-    const displaySection = document.querySelector('.display-section');
-    const toggleIcon = document.querySelector('.toggle-icon');
-    
-    creationSection.classList.toggle('hidden');
-    displaySection.classList.toggle('full-width');
-    toggleIcon.classList.toggle('rotated');
+function updateTitle(index, newTitle) {
+    window.urls[index].title = newTitle;
+    saveURLs();
 }
 
+function updateURL() {
+    const urlList = document.getElementById('urlList');
+    const urlToUpdate = document.getElementById('url').value; // L'URL à mettre à jour
+    const titleToUpdate = document.getElementById('title').value; // Le titre associé à l'URL
+
+    // Vérifiez si l'URL existe déjà dans la liste
+    const existingURL = Array.from(urlList.children).find(item => item.dataset.url === urlToUpdate);
+
+    if (existingURL) {
+        // Mettez à jour le titre ou d'autres informations si nécessaire
+        existingURL.querySelector('.url-title').textContent = titleToUpdate; // Supposons que le titre est dans un élément avec la classe 'url-title'
+        alert('URL mise à jour avec succès!');
+    } else {
+        alert('L\'URL n\'existe pas.');
+    }
+}
+
+// function de fin de  chargement de la page Urls puis chargement du fichier 
+// des Urls
 window.addEventListener('load', function() {
     const creationSection = document.querySelector('.creation-section');
     const displaySection = document.querySelector('.display-section');
@@ -156,6 +216,14 @@ window.addEventListener('load', function() {
     }) // Appel de la fonction Python pour charger les URLs après le chargement du DOM
     
 });
+
+//function de sauvegarde du fichier des url
 function saveURLs() {
 eel.save_urls(window.urls);
+}
+
+function deleteURL(index) {
+    window.urls.splice(index, 1); // Supprime l'URL de l'array
+    filterURLs(currentCategory); // Met à jour l'affichage
+    saveURLs(); // Sauvegarde les modifications
 }

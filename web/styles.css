@@ -145,10 +145,11 @@ button:hover {
     backdrop-filter: blur(10px);
     border: 1px solid #bbb;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    padding: 10px;
+    padding: 4px;
+    margin: 5;
     border-radius: 4px;
     width: 150px;
-    height: 150px;
+    height: 100px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -211,13 +212,13 @@ button:hover {
     margin-bottom: 15px;
 }
 .edit-category {
-    background-color: #3498db;
-    margin-top: 5px;
-    font-size: 0.8em;
-    padding: 5px;
+    width: 20px; /* Ajustez la taille de l'icône */
+    height: auto; /* Conserve le ratio de l'image */
+    cursor: pointer; /* Change le curseur au survol */
+    transition: transform 0.2s; /* Ajoute une transition pour l'effet de survol */
 }
 .edit-category:hover {
-    background-color: #2980b9;
+    transform: scale(1.1); /* Agrandit l'icône au survol */
 }
 .category-select {
     display: inline-block;
