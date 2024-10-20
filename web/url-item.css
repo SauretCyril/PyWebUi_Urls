@@ -1,0 +1,48 @@
+
+.url-item {
+    background-color: rgba(249, 249, 249, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid #bbb;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 4px;
+    margin: 5;
+    border-radius: 4px;
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.url-link {
+    word-break: break-all;
+    font-size: 0.8em;
+}
+.url-item h3 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+    color: #2c6e2e;
+}
+.url-item p {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.edit-category {
+    width: 20px; /* Ajustez la taille de l'icône */
+    height: auto; /* Conserve le ratio de l'image */
+    cursor: pointer; /* Change le curseur au survol */
+    transition: transform 0.2s; /* Ajoute une transition pour l'effet de survol */
+}
+.edit-category:hover {
+    transform: scale(1.1); /* Agrandit l'icône au survol */
+}
+.category-select {
+    display: inline-block;
+    width: auto;
+    margin-right: 5px;
+    font-size: 0.8em;
+    padding: 2px;
+}
