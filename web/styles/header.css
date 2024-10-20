@@ -1,0 +1,46 @@
+header {
+    background-color: rgba(76, 175, 80, 0.9);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-grow: 1;
+    text-align: center;
+}
+.header-buttons {
+    display: flex;
+}
+#toggleButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 10px;
+}
+.header-buttons button {
+    background-color: white;
+    color: #4CAF50;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.header-buttons button:hover {
+    background-color: #f0f0f0;
+}
+.toggle-icon {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    transition: transform 0.3s ease;
+}
+.toggle-icon.rotated {
+    transform: rotate(180deg);
+}
