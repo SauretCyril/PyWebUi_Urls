@@ -115,7 +115,7 @@ function createUrlItem(item, index) {
         <div style="position: relative;">
             <button class="delete-url" onclick="deleteURL(${index})" style="position: absolute; top: -10; right: -10; background: none; border: none; color: red; font-size: 16px;">✖</button>
             <input type="text" value="${item.title}" onchange="updateTitle(${index}, this.value)" />
-            <p class="url-link"><a href="#" onclick="openUrl(${index}); return false;">${truncateURL(item.url, 20)}</a></p>
+            <p class="url-link"><a href="#" onclick="openUrl('${item.title}'); return false;">${truncateURL(item.url, 20)}</a></p>
             <p>${truncateEmail(item.email, 15)}</p>
             <p>${item.category}</p>
             <select class="category-select" onchange="editCategory(${index}, this.value)">
@@ -127,8 +127,20 @@ function createUrlItem(item, index) {
 }
 
 // ouverture de du navigateur avec l'url
-function openUrl(index){
-    eel.openUrl(window.urls[index].url);
+// cyril sauret correcton on ouvre pas avec l'index qui corresponde à l'élément dans le tableau filtré 
+// mais avec le bon item Urs en le trouvant avec son title 
+function openUrl(title){
+    console.log(title);
+      if (window.urls) {
+        const urlItem = window.urls.find(item => item.title === title);
+        if (urlItem) {
+            eel.openUrl(urlItem.url);
+        } else {
+            console.log('URL non trouvée pour le titre : ' + title);
+        }
+    } else {
+        console.log('window.urls n\'existe pas.');
+    } 
 }
 
 //racourci de l'url
@@ -192,6 +204,8 @@ function updateURL() {
     } else {
         alert('L\'URL n\'existe pas.');
     }
+    
+    saveURLs(); // Sauvegarde les modifications
 }
 
 // function de fin de  chargement de la page Urls puis chargement du fichier 
@@ -219,7 +233,7 @@ window.addEventListener('load', function() {
 
 //function de sauvegarde du fichier des url
 function saveURLs() {
-eel.save_urls(window.urls);
+    eel.save_urls(window.urls);
 }
 
 function deleteURL(index) {
